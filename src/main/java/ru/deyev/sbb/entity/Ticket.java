@@ -1,49 +1,32 @@
 package ru.deyev.sbb.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "tickets")
-public class Ticket extends SimpleEntity {
+public class Ticket {
 
-    @Column(name = "train_number")
-    private Long trainNumber;
-    @Column(name = "passenger")
-    private Passenger passenger;
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "ticket_id", updatable = false, nullable = false, columnDefinition = "UUID")
+    private UUID id;
 
+    @Column(name = "train_id")
+    private UUID trainId;
 
-    public Ticket() {
-    }
+    @Column(name = "passenger_id")
+    private UUID passengerId;
 
-    public Ticket(Long trainNumber, Passenger passenger) {
-        this.trainNumber = trainNumber;
-        this.passenger = passenger;
-    }
+    @Column(name = "arrive_point_id")
+    private UUID arrivePointId;
 
-    public Long getTrainNumber() {
-        return trainNumber;
-    }
-
-    public void setTrainNumber(Long trainNumber) {
-        this.trainNumber = trainNumber;
-    }
-
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", trainNumber=" + trainNumber +
-                ", passenger=" + passenger +
-                '}';
-    }
+    @Column(name = "departure_point_id")
+    private UUID departurePointId;
 }

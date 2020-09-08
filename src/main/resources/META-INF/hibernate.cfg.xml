@@ -27,6 +27,9 @@
         <mapping class="ru.deyev.sbb.entity.Ticket"/>
         <mapping class="ru.deyev.sbb.entity.Train"/>
         <mapping class="ru.deyev.sbb.entity.User"/>
+        <mapping class="ru.deyev.sbb.entity.Role"/>
+        <mapping class="ru.deyev.sbb.entity.Point"/>
+        <mapping class="ru.deyev.sbb.entity.Route"/>
 
 
 

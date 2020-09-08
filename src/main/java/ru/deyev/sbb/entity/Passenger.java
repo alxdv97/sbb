@@ -1,59 +1,32 @@
 package ru.deyev.sbb.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.UUID;
 
 @Entity
 @Table(name = "passengers")
-public class Passenger extends SimpleEntity{
+public class Passenger {
 
-    @Column(name = "name")
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "passenger_id", updatable = false, nullable = false, columnDefinition = "UUID")
+    private UUID id;
+
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
-    @Column(name = "surname")
+
+    @Column(name = "surname", length = 50, nullable = false)
     private String surname;
-    @Column(name = "dateOfBirth")
-    private Calendar dateOfBirth;
 
-    public Passenger() {
-    }
+    @Column(name = "birth_date", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar birthDate;
 
-    public Passenger(String name, String surname, Calendar dateOfBirth) {
-        this.name = name;
-        this.surname = surname;
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public Calendar getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Calendar dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Override
-    public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
-    }
 }
