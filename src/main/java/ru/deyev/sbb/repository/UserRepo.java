@@ -1,9 +1,14 @@
 package ru.deyev.sbb.repository;
 
+import org.springframework.stereotype.Repository;
 import ru.deyev.sbb.entity.User;
 
-import java.util.List;
+@Repository
+public class UserRepo extends BasicRepository<User>{
 
-public interface UserRepo {
-    List<User> findAll();
+    protected UserRepo() {
+        super(User.class);
+    }
+
+
 }

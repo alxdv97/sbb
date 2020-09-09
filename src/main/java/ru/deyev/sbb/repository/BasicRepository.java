@@ -1,29 +1,39 @@
 package ru.deyev.sbb.repository;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.UUID;
 
 public class BasicRepository<T> {
 
-    protected Class<T> entityClass;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    @PersistenceContext(unitName = "sbb_pu")
-    protected EntityManager entityManager;
+    protected Class<T> entityClass;
 
     protected BasicRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
+//    @Autowired
+//    public void setSessionFactory(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
+
+    protected Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     public void create(T entity) {
-        entityManager.persist(entity);
+        getSession().persist(entity);
     }
 
     public T findById(UUID id) throws EntityNotFoundException {
-        T entity = entityManager.find(entityClass, id);
+        T entity = getSession().find(entityClass, id);
         if (entity != null) {
             return entity;
         }
@@ -31,41 +41,26 @@ public class BasicRepository<T> {
                 + " with id " + id.toString() + " not found.");
     }
 
-    public List<T> findAll(){
-//        List<T> resultList = entityManager.createQuery("select t from "
-//                + entityClass.getCanonicalName()+ " t").getResultList();
-//        if (resultList == null || resultList.isEmpty()){
-//            throw new EntityNotFoundException("There aren't any " + entityClass.getSimpleName()
-//                    + "s in system");
-//        }
-//        return resultList;
-        //------------
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<T> cq = cb.createQuery(entityClass);
-//        Root<T> rootEntry = cq.from(entityClass);
-//        CriteriaQuery<T> all = cq.select(rootEntry);
-//        TypedQuery<T> allQuery = entityManager.createQuery(all);
-//        return allQuery.getResultList();
-        //-------------
-        return entityManager.createQuery("Select t from " +
+    public List<T> findAll() {
+        return getSession().createQuery("Select t from " +
                 entityClass.getSimpleName() + " t")
                 .getResultList();
     }
 
-    public void update(T entity){
-        entityManager.merge(entity);
+    public void update(T entity) {
+        getSession().merge(entity);
     }
 
-    public void delete(UUID id){
-        entityManager.remove(findById(id));
+    public void delete(UUID id) {
+        getSession().remove(findById(id));
     }
 
     public void detach(T entity) {
-        entityManager.detach(entity);
+        getSession().detach(entity);
     }
 
     public void refresh(T entity) {
-        entityManager.refresh(entity);
+        getSession().refresh(entity);
     }
 
 
