@@ -1,5 +1,6 @@
 package ru.deyev.sbb.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +12,7 @@ import java.util.List;
 @Repository
 public class UserRepoImpl implements UserRepo{
 
-    @PersistenceContext(unitName = "sbb_pu")
+    @Autowired
     protected EntityManager entityManager;
 
 //    @PersistenceUnit(unitName = "sbb_pu")
