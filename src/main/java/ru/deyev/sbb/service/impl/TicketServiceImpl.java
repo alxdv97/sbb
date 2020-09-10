@@ -2,6 +2,7 @@ package ru.deyev.sbb.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.deyev.sbb.entity.Ticket;
 import ru.deyev.sbb.repository.PassengerRepo;
 import ru.deyev.sbb.repository.PointRepo;
@@ -27,6 +28,7 @@ public class TicketServiceImpl implements TicketService {
     private PointRepo pointRepo;
 
     @Override
+    @Transactional
     public List<Ticket> getAllTickets() {
         return ticketRepo.findAll();
     }
