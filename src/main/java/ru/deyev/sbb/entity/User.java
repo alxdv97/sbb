@@ -26,6 +26,7 @@ public class User {
     @Column(name = "password", length = 100, nullable = false)
     private String password;
 
-    @Column (name = "role_id")
-    private UUID roleId;
+    @OneToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }

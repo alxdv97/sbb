@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div id=header" class="row">Header</div>
+        <div id=header" class="row" >Header</div>
         <div id="content" class="row">
             <div id="page-content" class="col-8">
                 <div class="row">

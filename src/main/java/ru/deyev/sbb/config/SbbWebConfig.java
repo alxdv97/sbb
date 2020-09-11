@@ -2,10 +2,11 @@ package ru.deyev.sbb.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class SbbWebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{HibernateConfig.class};
+        return new Class[]{HibernateConfig.class, RootConfig.class};
     }
 
     @Override

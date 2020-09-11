@@ -21,8 +21,9 @@ public class Point {
     @Column(name = "point_id", updatable = false, nullable = false, columnDefinition = "UUID")
     private UUID id;
 
-    @Column(name = "station_id")
-    private UUID stationId;
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station station;
 
     @Column(name = "arrive_time", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,7 +36,8 @@ public class Point {
     @Column(name = "sequential_route_number", nullable = false)
     private int sequentialRouteNumber;
 
-    @Column(name = "route_id")
-    private UUID routeId;
+    @ManyToOne
+    @JoinColumn(name = "route_id")
+    private Route route;
 
 }

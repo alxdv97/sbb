@@ -21,8 +21,9 @@ public class Train {
     private UUID id;
 
 
-    @Column(name = "route_id")
-    private UUID routeId;
+    @OneToOne
+    @JoinColumn(name = "route_id")
+    private Route route;
 
     @Column(name = "number", nullable = false)
     private int number;

@@ -20,15 +20,19 @@ public class Ticket {
     @Column(name = "ticket_id", updatable = false, nullable = false, columnDefinition = "UUID")
     private UUID id;
 
-    @Column(name = "train_id")
-    private UUID trainId;
+    @ManyToOne
+    @JoinColumn(name = "train_id")
+    private Train train;
 
-    @Column(name = "passenger_id")
-    private UUID passengerId;
+    @OneToOne
+    @JoinColumn(name = "passenger_id")
+    private Passenger passenger;
 
-    @Column(name = "arrive_point_id")
-    private UUID arrivePointId;
+    @ManyToOne
+    @JoinColumn(name = "arrive_point_id")
+    private Point arrivePoint;
 
-    @Column(name = "departure_point_id")
-    private UUID departurePointId;
+    @ManyToOne
+    @JoinColumn(name = "departure_point_id")
+    private Point departurePoint;
 }
