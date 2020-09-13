@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
-public class BasicRepository<T> {
+public abstract class BasicRepository<T> {
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -19,10 +19,6 @@ public class BasicRepository<T> {
         this.entityClass = entityClass;
     }
 
-//    @Autowired
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
 
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
